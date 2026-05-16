@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>String Sorter</title>
+    <style>
+        body { font-family: sans-serif; max-width: 500px; margin: 60px auto; padding: 0 20px; }
+        label { display: block; margin-top: 8px; }
+        input[type=text] { width: 100%; padding: 8px; margin: 4px 0 12px; box-sizing: border-box; }
+        input:invalid { border-color: #d9534f; }
+        button { padding: 10px 24px; background: #4a90e2; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #357abd; }
+        .result { margin-top: 24px; }
+        .result li { padding: 6px 0; border-bottom: 1px solid #eee; font-size: 1.1em; }
+        .errors { background: #fdecea; border: 1px solid #f5c2c0; color: #611a15; padding: 12px; border-radius: 4px; margin-top: 16px; }
+        .errors ul { margin: 6px 0 0 18px; padding: 0; }
+        small { color: #666; }
+    </style>
+</head>
+<body>
+    <h2>String Sorter</h2>
+    <p>Enter {{ num_inputs }} strings. They will be sorted by length. Strings of {{ short_threshold }} characters or fewer appear in uppercase; longer strings are capitalized.</p>
+
+    {# ``novalidate`` disables native browser bubbles so our server-side
+       errors are the single source of truth for the user. The HTML5
+       attributes (required/minlength/maxlength) are still useful as a
+       UX hint via the :invalid CSS pseudo-class. #}
+    <form method="post" novalidate>
+        {# CSRF synchroniser token. The matching value lives in the
+           HttpOnly session cookie, so an attacker on a third-party
+           origin cannot read it to forge requests. #}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+        {% for i in range(1, num_inputs + 1) %}
+        <label for="s{{ i }}">String {{ i }}</label>
+        <input type="text" id="s{{ i }}" name="s{{ i }}" value="{{ values[i-1] }}"
+               required minlength="1" maxlength="{{ max_length }}" autocomplete="off">
+        {% endfor %}
+        <small>Each string must be 1&ndash;{{ max_length }} characters.</small><br><br>
+        <button type="submit">Sort</button>
+    </form>
+
+    {% if errors %}
+    <div class="errors">
+        <strong>Please fix the following:</strong>
+        <ul>
+            {% for e in errors %}<li>{{ e }}</li>{% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if results %}
+    <div class="result">
+        <h3>Sorted result:</h3>
+        <ul>
+            {% for r in results %}
+            <li>{{ r }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</body>
+</html>

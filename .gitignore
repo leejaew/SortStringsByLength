@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+venv (deactivated)/
+env/
+.pythonlibs/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Replit internal (kept out of GitHub — these are workspace state, not source)
+.local/
+.agents/
+.cache/
+.config/
+.upm/
+.breakpoints/
+.breakpoints
+VENV.md
+
+# Logs
+*.log
+/tmp/
