@@ -70,3 +70,7 @@ gunicorn main:app --bind 0.0.0.0:$PORT
 ```
 
 The codebase is platform-agnostic — it has no hard dependency on any specific PaaS.
+
+## License
+
+Released under the [MIT License](LICENSE).
