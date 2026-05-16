@@ -69,4 +69,4 @@ The app runs on any WSGI server. For production:
 gunicorn main:app --bind 0.0.0.0:$PORT
 ```
 
-On Replit, click **Publish** — the included `.replit` config is set to a `vm` deployment target running `python3 main.py`.
+The codebase is platform-agnostic — it has no hard dependency on any specific PaaS.

@@ -31,7 +31,9 @@ env/
 .DS_Store
 Thumbs.db
 
-# Replit internal (kept out of GitHub — these are workspace state, not source)
+# Replit internal (kept out of GitHub — this repo is platform-agnostic)
+.replit
+replit.nix
 .local/
 .agents/
 .cache/
